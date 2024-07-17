@@ -1,28 +1,15 @@
 import './App.css'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Layout from "./Layout.tsx";
-
-function Home() {
-    return <>Home</>;
-}
-
-function About() {
-    return <>About</>;
-}
-
-function Page404() {
-    return <>Page Not Found</>;
-}
-
-function Ingredients() {
-    return <>Ingredients</>;
-}
-
-function Recipes() {
-    return <>Recipes</>;
-}
+import Home from "./Home.tsx";
+import Ingredients from "./Ingredients.tsx";
+import Recipes from "./Recipes.tsx";
+import About from "./About.tsx";
+import Page404 from "./Page404.tsx";
+import pathConstants from "./pathConstants.ts";
 
 function App() {
+
 
     const router = createBrowserRouter([
         {
@@ -31,16 +18,16 @@ function App() {
             // child route components
             children: [
                 {
-                    path: "/",
+                    path: pathConstants.HOME,
                     element: <Home/>,
                 }, {
-                    path: "/ingredients",
+                    path: pathConstants.INGREDIENTS,
                     element: <Ingredients/>,
                 }, {
-                    path: "/recipes",
+                    path: pathConstants.RECIPES,
                     element: <Recipes/>,
                 }, {
-                    path: "/about",
+                    path: pathConstants.ABOUT,
                     element: <About/>,
                 },
             ],
