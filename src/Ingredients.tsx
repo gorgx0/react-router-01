@@ -1,5 +1,5 @@
 import {Button, Form, ListGroup, Modal} from "react-bootstrap";
-import React, {useState} from "react";
+import {FormEvent, FormEventHandler, useState} from "react";
 
 const ingredients = [
     {"name": "Pepper", "unit": "g"},
@@ -23,7 +23,7 @@ export default function() {
 
     const [ingredientsList, setIngredientsList] = useState(ingredients)
 
-    function addNewIngredient(event: React.FormEvent<AddNewIngredientFormElement>) {
+    function addNewIngredient(event: FormEvent<AddNewIngredientFormElement>) {
         event.preventDefault()
         const name = event.currentTarget.elements.newIngredientName.value
         const unit = event.currentTarget.elements.newIngredientUnit.value
@@ -37,7 +37,7 @@ export default function() {
         <Modal.Header closeButton>
             <Modal.Title>Add New</Modal.Title>
         </Modal.Header>
-        <Form onSubmit={addNewIngredient}>
+        <Form onSubmit={addNewIngredient as unknown as FormEventHandler<HTMLFormElement>}>
             <Modal.Body>
                 <Form.Group controlId={"newIngredientName"}>
                     <Form.Label>Add new ingredient</Form.Label>
