@@ -1,5 +1,6 @@
-import {Button, Form, ListGroup, Modal} from "react-bootstrap";
-import {FormEvent, FormEventHandler, useState} from "react";
+import {Button, ListGroup} from "react-bootstrap";
+import {FormEvent, useState} from "react";
+import AddNewModal from "./AddNewModal.tsx";
 
 const ingredients = [
     {"name": "Pepper", "unit": "g"},
@@ -33,28 +34,6 @@ export default function() {
         hideAddNew()
     }
 
-    const AddNewModal = () => <Modal show={addNewShown} onHide={hideAddNew}>
-        <Modal.Header closeButton>
-            <Modal.Title>Add New</Modal.Title>
-        </Modal.Header>
-        <Form onSubmit={addNewIngredient as unknown as FormEventHandler<HTMLFormElement>}>
-            <Modal.Body>
-                <Form.Group controlId={"newIngredientName"}>
-                    <Form.Label>Add new ingredient</Form.Label>
-                    <Form.Control type={"text"} placeholder="Enter name" />
-                </Form.Group>
-                <Form.Group controlId={"newIngredientUnit"}>
-                    <Form.Label>Unit of measure</Form.Label>
-                    <Form.Control type={"text"} placeholder="Enter unit" />
-                </Form.Group>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button type={"submit"}>Add</Button>
-                <Button onClick={hideAddNew}>Close</Button>
-            </Modal.Footer>
-        </Form>
-    </Modal>
-
     const [addNewShown, setAddNewShown] = useState(false)
 
     function showAddNew() {
@@ -71,6 +50,6 @@ export default function() {
             {ingredients.map(ingredient => (<ListGroup.Item>{ingredient.name} [{ingredient.unit}]</ListGroup.Item>))}
         </ListGroup>
         <Button className={"my-3"} onClick={showAddNew}>Add new</Button>
-        <AddNewModal/>
+        <AddNewModal show={addNewShown} hideAddNew={hideAddNew} addNewIngredient={addNewIngredient}/>
     </>;
 }
