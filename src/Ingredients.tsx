@@ -11,7 +11,8 @@ const ingredients = [
 ]
 
 interface FormElements extends HTMLFormControlsCollection {
-    newIngredientName: HTMLInputElement
+    newIngredientName: HTMLInputElement,
+    newIngredientUnit: HTMLInputElement
 }
 
 interface AddNewIngredientFormElement {
@@ -22,10 +23,11 @@ export default function() {
 
     const [ingredientsList, setIngredientsList] = useState(ingredients)
 
-    function addNewIngredient(e: React.FormEvent<AddNewIngredientFormElement>) {
-        e.preventDefault()
-        const name = e.currentTarget.elements.newIngredientName.value
-        ingredientsList.push({"name": name, unit: "g"})
+    function addNewIngredient(event: React.FormEvent<AddNewIngredientFormElement>) {
+        event.preventDefault()
+        const name = event.currentTarget.elements.newIngredientName.value
+        const unit = event.currentTarget.elements.newIngredientUnit.value
+        ingredientsList.push({name: name, unit: unit})
         setIngredientsList(ingredientsList)
         console.log(ingredients)
         hideAddNew()
@@ -40,7 +42,10 @@ export default function() {
                 <Form.Group controlId={"newIngredientName"}>
                     <Form.Label>Add new ingredient</Form.Label>
                     <Form.Control type={"text"} placeholder="Enter name" />
-                    {/*<Form.Text></Form.Text>*/}
+                </Form.Group>
+                <Form.Group controlId={"newIngredientUnit"}>
+                    <Form.Label>Unit of measure</Form.Label>
+                    <Form.Control type={"text"} placeholder="Enter unit" />
                 </Form.Group>
             </Modal.Body>
             <Modal.Footer>
