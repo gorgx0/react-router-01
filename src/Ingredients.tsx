@@ -20,7 +20,7 @@ interface AddNewIngredientFormElement extends HTMLFormElement {
     readonly elements: FormElements
 }
 
-export default function() {
+export default function Ingredients() {
 
     const [ingredientsList, setIngredientsList] = useState(ingredients)
 
