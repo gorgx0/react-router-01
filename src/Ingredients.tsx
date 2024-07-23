@@ -16,7 +16,7 @@ interface FormElements extends HTMLFormControlsCollection {
     newIngredientUnit: HTMLInputElement
 }
 
-interface AddNewIngredientFormElement {
+interface AddNewIngredientFormElement extends HTMLFormElement {
     readonly elements: FormElements
 }
 

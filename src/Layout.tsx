@@ -13,9 +13,11 @@ export default function Layout() {
                 </Col>
             </Row>
             <Row className="my-3">
+                <Col className={'col-lg-3'}/>
                 <Col className="text-center">
                     <Outlet/>
                 </Col>
+                <Col className={'col-lg-3'}/>
             </Row>
             <Row className="my-3 fixed-bottom">
                 <Col className="text-center">
