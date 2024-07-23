@@ -1,15 +1,7 @@
 import {Button, ListGroup} from "react-bootstrap";
-import {FormEvent, useState} from "react";
+import {FormEvent, useContext, useState} from "react";
 import AddNewModal from "./AddNewModal.tsx";
-
-const ingredients = [
-    {"name": "Pepper", "unit": "g"},
-    {"name": "Salt", "unit": "g"},
-    {"name": "Milk", "unit": "ml"},
-    {"name": "Egg", "unit": "piece"},
-    {"name": "Olive Oil", "unit": "ml"},
-    {"name": "Garlic", "unit": "clove"}
-]
+import {DataContext} from "./DataContext.tsx";
 
 interface FormElements extends HTMLFormControlsCollection {
     newIngredientName: HTMLInputElement,
@@ -22,7 +14,9 @@ interface AddNewIngredientFormElement extends HTMLFormElement {
 
 export default function Ingredients() {
 
-    const [ingredientsList, setIngredientsList] = useState(ingredients)
+    const data = useContext(DataContext)
+
+    const [ingredientsList, setIngredientsList] = useState(data.ingredients)
 
     function addNewIngredient(event: FormEvent<AddNewIngredientFormElement>) {
         event.preventDefault()
@@ -30,7 +24,7 @@ export default function Ingredients() {
         const unit = event.currentTarget.elements.newIngredientUnit.value
         ingredientsList.push({name: name, unit: unit})
         setIngredientsList(ingredientsList)
-        console.log(ingredients)
+        console.log(ingredientsList)
         hideAddNew()
     }
 
@@ -47,7 +41,7 @@ export default function Ingredients() {
     return <>
         <h3>Ingredients</h3>
         <ListGroup>
-            {ingredients.map(ingredient => (<ListGroup.Item>{ingredient.name} [{ingredient.unit}]</ListGroup.Item>))}
+            {data.ingredients.map(ingredient => (<ListGroup.Item>{ingredient.name} [{ingredient.unit}]</ListGroup.Item>))}
         </ListGroup>
         <Button className={"my-3"} onClick={showAddNew}>Add new</Button>
         <AddNewModal show={addNewShown} hideAddNew={hideAddNew} addNewIngredient={addNewIngredient}/>
