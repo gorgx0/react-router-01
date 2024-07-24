@@ -5,4 +5,14 @@ export interface Ingredient {
     unit: string
 }
 
-export const DataContext = React.createContext({ingredients: [] as Ingredient[]});
+export interface Recipe {
+    name: string;
+    ingredients: {ingredient: Ingredient, amount: number}[]
+}
+
+const defaultData = {
+    ingredients: [] as Ingredient[],
+    recipes: [] as Recipe[],
+}
+
+export const DataContext = React.createContext(defaultData);
