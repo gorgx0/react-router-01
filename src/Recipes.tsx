@@ -1,5 +1,6 @@
 import {useContext} from "react";
 import {DataContext, Recipe} from "./DataContext.tsx";
+import {Accordion} from "react-bootstrap";
 
 export default function Recipes() {
 
@@ -9,11 +10,16 @@ export default function Recipes() {
         return recipe.ingredients.map((ing)=>(<>{ing.ingredient.name} - {ing.amount} {ing.ingredient.unit}<br/></>))
     }
 
-    const recipeNames = data.recipes.map((recipe)=>{
-        return (<><h5><u>{recipe.name}</u></h5><br/>{ingredientsList(recipe)}<hr/></>)
-    })
-
     return (<>
-        {recipeNames}
+        <Accordion alwaysOpen>
+            {data.recipes.map((recipe)=>(
+                <Accordion.Item eventKey={recipe.name}>
+                    <Accordion.Header>{recipe.name}</Accordion.Header>
+                    <Accordion.Body>
+                        {ingredientsList(recipe)}
+                    </Accordion.Body>
+                </Accordion.Item>
+            ))}
+        </Accordion>
     </>)
 }
